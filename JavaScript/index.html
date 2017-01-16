@@ -47,7 +47,7 @@
     <div id="dettaglio">
         <table class="table table-hover">
           <thead>
-            <button onclick="indietro()">Indietro</button>
+            <button onclick="films.indietro()">Indietro</button>
             <tr>
               <th>Immagine</th>
               <th>Voti</th>
@@ -65,17 +65,13 @@
 
     <script src="jquery/jquery-3.1.1-dist/jquery-3.1.1.min.js"></script>
     <script src="bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="js/example.js"></script>
     <script type="text/javascript">
-
-    function indietro(){
-      document.getElementById("table").style.display = 'block';
-      document.getElementById("dettaglio").style.display = 'none';
-    }
 
       document.getElementById("dettaglio").style.display="none";
     //javascript
       $('tbody').on("click","tr",function(){
-            console.log(this);
+            // console.log(this);
             var endpoint='http://www.omdbapi.com/?i=';
             var url=endpoint;
             var ricevuto=this.id;
