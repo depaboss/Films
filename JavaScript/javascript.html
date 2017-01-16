@@ -1,81 +1,33 @@
 <!DOCTYPE html>
-<html lang="it">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<html>
+<head>
+	<title>javascript</title>
+</head>
+<body>
 
-    <title>Film</title>
- 
-    <!-- <link href="bootstap/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet"> -->
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-  </head>
-  <body>
 
-    <!--BASE DI PARTENZA-->
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="center">Film</h1>
-                <form id="target">
-                    <div id="custom-search-input">
-                        <div class="input-group col-md-12">
-                            <input type="text" name="titolo" class="form-control input-lg center" placeholder="Titolo" />
-                        </div>
-                    </div>
-                </form type="submit">
-            </div>
-        </div>
-        <!-- APPLICATION START HERE -->
-
-    <div id="table">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Immagine</th>
-              <th>Titolo</th>
-              <th>Tipo</th>
-              <th>Anno</th>
-            </tr>
-          </thead>
-          <tbody id="tb_film">
-          </tbody>
-        </table>
-    </div>
-    <div id="dettaglio">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Immagine</th>
-              <th>Voti</th>
-              <th>Descrizione</th>
-            </tr>
-          </thead>
-          <tbody id="tb_det">
-          </tbody>
-        </table>
-    </div>
-
-    </div>
-    
-<!--fine-->
-
-    <!-- <script src="bootstap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script> -->
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="jquery/jquery-3.1.1-dist/jquery-3.1.1.min.js"></script>
+	<script src="jquery/jquery-3.1.1-dist/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
       
     //javascript
-      $('tbody').on("click","tr",function(){
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    	$('tbody').on("click","tr",function(){
             console.log(this);
             var endpoint='http://www.omdbapi.com/?i=';
             var url=endpoint;
@@ -169,6 +121,7 @@
                 console.log(err);
             });
         });
+
     </script>
-  </body>
+</body>
 </html>
