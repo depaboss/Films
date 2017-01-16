@@ -3,7 +3,7 @@ var films = (function() {
 	var _titolo= function(valore){
 		var endpoint='http://www.omdbapi.com/?s=';
         var url=endpoint;
-        var titolo=valo
+        var titolo=valore
         $.ajax({
           url: url + titolo,
           method: 'GET'
