@@ -10,7 +10,8 @@ var films = (function() {
         }).then(function(data) {/*successo*/
           console.log(data);
           var film=data;
-          $("#tb_film").html("");
+          document.getElementById('tb_film').innerHTML="";
+          //$("#tb_film").html("");
           var tr='';
           console.log(film.Search.length);
           for(i=0;i<film.Search.length;i++){
@@ -31,7 +32,8 @@ var films = (function() {
             'tr>';
             console.log(film.Search[i].imdbI
           }
-          $("#tb_film").html(tr);
+          document.getElementById("tb_film").innerHTML=tr;
+          // $("#tb_film").html(tr);
         },function(err){/*errore 400*/
             console.log(err);
         }).catch(function(err){/*errore 500*/
@@ -43,16 +45,17 @@ var films = (function() {
 		var endpoint='http://www.omdbapi.com/?i=';
         var url=endpoint;
         var ricevuto=this.
-        /*var data={
-          s:titolo,
-        };*/
+
         $.ajax({
           url: url + ricevuto,
           method: 'GET'
         }).then(function(data) {
-            $("#table").hide();
-            $("#dettaglio").show();
+        	document.getElementById("table").style.display = 'none';
+            // $("#table").hide();
+            document.getElementById("dettaglio").style.display = 'block';
+            // $("#dettaglio").show();
             console.log(data);
+            
             $("#tb_det").html("");
             var film=data;
             var tr='';
@@ -82,8 +85,9 @@ var films = (function() {
             '<p>'+'Paese: '+film.Country+'</p>'+
             '<p>'+'Premi: '+film.Awards+'</p>'+
             '</td>'+
-            'tr>';
-          $("#tb_det").html(tr);
+            '</tr>';
+          document.getElementById("tb_det").innerHTML=tr;
+          // $("#tb_det").html(tr);
         });
 	};
 

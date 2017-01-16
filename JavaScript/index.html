@@ -21,7 +21,7 @@
                 <form id="target">
                     <div id="custom-search-input">
                         <div class="input-group col-md-12">
-                            <input type="text" name="titolo" class="form-control input-lg center" placeholder="Titolo" />
+                            <input id="input_titolo" type="text" name="titolo" class="form-control input-lg center" placeholder="Titolo" />
                         </div>
                     </div>
                 </form type="submit">
@@ -47,6 +47,7 @@
     <div id="dettaglio">
         <table class="table table-hover">
           <thead>
+            <button onclick="indietro()">Indietro</button>
             <tr>
               <th>Immagine</th>
               <th>Voti</th>
@@ -65,7 +66,13 @@
     <script src="jquery/jquery-3.1.1-dist/jquery-3.1.1.min.js"></script>
     <script src="bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-      
+
+    function indietro(){
+      document.getElementById("table").style.display = 'block';
+      document.getElementById("dettaglio").style.display = 'none';
+    }
+
+      document.getElementById("dettaglio").style.display="none";
     //javascript
       $('tbody').on("click","tr",function(){
             console.log(this);
@@ -80,40 +87,44 @@
               url: url + ricevuto,
               method: 'GET'
             }).then(function(data) {
-                $("#table").hide();
-                $("#dettaglio").show();
-                console.log(data);
-                $("#tb_det").html("");
+                document.getElementById("table").style.display = 'none';
+                // $("#table").hide();
+                document.getElementById("dettaglio").style.display = 'block';
+                // $("#dettaglio").show();
+                // console.log(data);
+                document.getElementById("tb_det").innerHTML="";
+                // $("#tb_det").html("");
                 var film=data;
                 var tr='';
                 var img="";
                 if(film.Poster=='N/A'){
-                    img="http://placehold.it/300x450";
+                    // img="http://placehold.it/300x450";
                 }else{
                     img=film.Poster;
-                }
-                tr +=''+
-                "<tr>"+
-                '<td>'+'<img src="'+img+'" alt="testo" />'+'</td>'+
-                '<td>'+
-                '<p>'+'Titolo: '+film.Title+'</p>'+
-                '<p>'+'Genere: '+film.Genre+'</p>'+
-                '<p>'+'Anno: '+film.Released+'</p>'+
-                '<p>'+'Metascore: '+film.Metascore+'</p>'+
-                '<p>'+'imdbRating: '+film.imdbRating+'</p>'+
-                '<p>'+'imdbVotes: '+film.imdbVotes+'</p>'+
-                '</td>'+
-                '<td>'+
-                '<p>'+'Direttore: '+film.Director+'</p>'+
-                '<p>'+'Scrittore: '+film.Writer+'</p>'+
-                '<p>'+'Attori: '+film.Actors+'</p>'+
-                '<p>'+'?: '+film.Plot+'</p>'+
-                '<p>'+'Lingua: '+film.Language+'</p>'+
-                '<p>'+'Paese: '+film.Country+'</p>'+
-                '<p>'+'Premi: '+film.Awards+'</p>'+
-                '</td>'+
-                'tr>';
-              $("#tb_det").html(tr);
+                    tr +=''+
+                    "<tr>"+
+                    '<td>'+'<img src="'+img+'" alt="testo" />'+'</td>'+
+                    '<td>'+
+                    '<p>'+'Titolo: '+film.Title+'</p>'+
+                    '<p>'+'Genere: '+film.Genre+'</p>'+
+                    '<p>'+'Anno: '+film.Released+'</p>'+
+                    '<p>'+'Metascore: '+film.Metascore+'</p>'+
+                    '<p>'+'imdbRating: '+film.imdbRating+'</p>'+
+                    '<p>'+'imdbVotes: '+film.imdbVotes+'</p>'+
+                    '</td>'+
+                    '<td>'+
+                    '<p>'+'Direttore: '+film.Director+'</p>'+
+                    '<p>'+'Scrittore: '+film.Writer+'</p>'+
+                    '<p>'+'Attori: '+film.Actors+'</p>'+
+                    '<p>'+'?: '+film.Plot+'</p>'+
+                    '<p>'+'Lingua: '+film.Language+'</p>'+
+                    '<p>'+'Paese: '+film.Country+'</p>'+
+                    '<p>'+'Premi: '+film.Awards+'</p>'+
+                    '</td>'+
+                    '</tr>';
+                }                
+              document.getElementById("tb_det").innerHTML=tr;
+              // $("#tb_det").html(tr);
           });
         });
 
@@ -121,7 +132,9 @@
             event.preventDefault();/*non mi manda su un'altra pagina*/
             var endpoint='http://www.omdbapi.com/?s=';
             var url=endpoint;
-            var titolo=$("input[name='titolo']").val();
+            var titolo= document.getElementById("input_titolo").value;
+            // var titolo=$("input[name='titolo']").val();
+            document.getElementById("input_titolo").value="";
 
             /*var data={
               s:titolo,
@@ -130,31 +143,35 @@
               url: url + titolo,
               method: 'GET'
             }).then(function(data) {/*successo*/
-              console.log(data);
+              // console.log(data);
               var film=data;
-              $("#tb_film").html("");
+              document.getElementById('tb_film').innerHTML="";
+              // $("#tb_film").html("");
               var tr='';
-              console.log(film.Search.length);
+              var number=1;
+              // console.log(film.Search.length);
               for(i=0;i<film.Search.length;i++){
                 var img="";
                 if(film.Search[i].Poster=='N/A'){
-                    img="http://placehold.it/300x450";
+                    // img="http://placehold.it/300x450";
                 }else{
                     img=film.Search[i].Poster;
+                    var id=film.Search[i].imdbID;
+                    tr +=''+
+                    "<tr class='dettaglio' id='"+id+"'>"+
+                    '<td>'+'<b>'+number+'<b>'+'</td>'+
+                    '<td>'+'<img src="'+img+'" alt="testo" />'+'</td>'+
+                    '<td>'+film.Search[i].Title+'</td>'+
+                    '<td>'+film.Search[i].Type+'</td>'+
+                    '<td>'+film.Search[i].Year+'</td>'+
+                    '</tr>';
+                    number++;
                 }
-                var id=film.Search[i].imdbID;
-                tr +=''+
-                "<tr class='dettaglio' id='"+id+"'>"+
-                '<td>'+'<b>'+(i+1)+'<b>'+'</td>'+
-                '<td>'+'<img src="'+img+'" alt="testo" />'+'</td>'+
-                '<td>'+film.Search[i].Title+'</td>'+
-                '<td>'+film.Search[i].Type+'</td>'+
-                '<td>'+film.Search[i].Year+'</td>'+
-                'tr>';
-                console.log(film.Search[i].imdbID);
+                // console.log(film.Search[i].imdbID);
 
               }
-              $("#tb_film").html(tr);
+              document.getElementById("tb_film").innerHTML=tr;
+              // $("#tb_film").html(tr);
             },function(err){/*errore 400*/
                 console.log(err);
             }).catch(function(err){/*errore 500*/
