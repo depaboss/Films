@@ -6,43 +6,39 @@ var films = (function() {
       	document.getElementById("dettaglio").style.display = 'none';
     };
 
-	var _titolo= function(){
+	var _titolo= function(data){
+		document.getElementById("input_titolo").value="";
         var film=data;
         document.getElementById('tb_film').innerHTML="";
         var tr='';
         var number=1;
         for(i=0;i<film.Search.length;i++){
-            var img="";
-            if(film.Search[i].Poster=='N/A'){
-                // img="http://placehold.it/300x450";
-            }else{
-                img=film.Search[i].Poster;
-                var id=film.Search[i].imdbID;
-                tr +=''+
-                "<tr class='dettaglio' id='"+id+"'>"+
-                '<td>'+'<b>'+number+'<b>'+'</td>'+
-                '<td>'+'<img src="'+img+'" alt="testo" />'+'</td>'+
-                '<td>'+film.Search[i].Title+'</td>'+
-                '<td>'+film.Search[i].Type+'</td>'+
-                '<td>'+film.Search[i].Year+'</td>'+
-                '</tr>';
-                number++;
-            }
+          var img="";
+          if(film.Search[i].Poster!='N/A'){
+              img=film.Search[i].Poster;
+              var id=film.Search[i].imdbID;
+              tr +=''+
+              "<tr class='dettaglio' id='"+id+"'>"+
+              '<td>'+'<b>'+number+'<b>'+'</td>'+
+              '<td>'+'<img src="'+img+'" alt="testo" />'+'</td>'+
+              '<td>'+film.Search[i].Title+'</td>'+
+              '<td>'+film.Search[i].Type+'</td>'+
+              '<td>'+film.Search[i].Year+'</td>'+
+              '</tr>';
+              number++;
+          }
         }
-        document.getElementById("tb_film").innerHTML=tr;      
+        document.getElementById("tb_film").innerHTML=tr;     
 	};
 
 	var _dettaglio= function(data){
-        document.getElementById("table").style.display = 'none';
+		document.getElementById("table").style.display = 'none';
         document.getElementById("dettaglio").style.display = 'block';
         document.getElementById("tb_det").innerHTML="";
-
         var film=data;
         var tr='';
         var img="";
-        if(film.Poster=='N/A'){
-            // img="http://placehold.it/300x450";
-        }else{
+        if(film.Poster!='N/A'){
             img=film.Poster;
             tr +=''+
             "<tr>"+
@@ -65,7 +61,7 @@ var films = (function() {
             '<p>'+'Premi: '+film.Awards+'</p>'+
             '</td>'+
             '</tr>';
-        }
+        }                
         document.getElementById("tb_det").innerHTML=tr;                
 	};
 
