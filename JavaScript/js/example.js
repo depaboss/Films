@@ -18,7 +18,7 @@ var films = (function() {
               img=film.Search[i].Poster;
               var id=film.Search[i].imdbID;
               tr +=''+
-              "<tr class='dettaglio' id='"+id+"'>"+
+              "<tr onclick='mostra(id)' class='dettaglio' id='"+id+"'>"+
               '<td>'+'<b>'+number+'<b>'+'</td>'+
               '<td>'+'<img src="'+img+'" alt="testo" />'+'</td>'+
               '<td>'+film.Search[i].Title+'</td>'+
@@ -28,7 +28,8 @@ var films = (function() {
               number++;
           }
         }
-        document.getElementById("tb_film").innerHTML=tr;     
+        document.getElementById("tb_film").innerHTML=tr;   
+        films.indietro();  
 	};
 
 	var _dettaglio= function(data){

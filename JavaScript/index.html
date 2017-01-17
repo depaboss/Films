@@ -69,36 +69,36 @@
     <script type="text/javascript">
 
       document.getElementById("dettaglio").style.display="none";
-      $('tbody').on("click","tr",function(){
-            var endpoint='http://www.omdbapi.com/?i=';
-            var url=endpoint;
-            var ricevuto=this.id;
+      var mostra = function(id){
+        var endpoint='http://www.omdbapi.com/?i=';
+        var url=endpoint;
+        var ricevuto=id;
 
-            $.ajax({
-              url: url + ricevuto,
-              method: 'GET'
-            }).then(function(data) {
-                films.dettaglio(data);
-          });
+        $.ajax({
+          url: url + ricevuto,
+          method: 'GET'
+        }).then(function(data) {
+          films.dettaglio(data);
         });
+      };
 
-        $("#target").submit(function( event ) {
-            event.preventDefault();/*non mi manda su un'altra pagina*/
-            var endpoint='http://www.omdbapi.com/?s=';
-            var url=endpoint;
-            var titolo= document.getElementById("input_titolo").value;
+      document.addEventListener('submit', function(event) {//mi metto in ascolto e appena faccio il submit parte la funzione
+        event.preventDefault();/*non mi manda su un'altra pagina*/
+        var endpoint='http://www.omdbapi.com/?s=';
+        var url=endpoint;
+        var titolo= document.getElementById("input_titolo").value;
 
-            $.ajax({
-              url: url + titolo,
-              method: 'GET'
-            }).then(function(data) {/*successo*/
-              films.titolo(data);
-            },function(err){/*errore 400*/
-                console.log(err);
-            }).catch(function(err){/*errore 500*/
-                console.log(err);
-            });
+        $.ajax({
+          url: url + titolo,
+          method: 'GET'
+        }).then(function(data) {/*successo*/
+          films.titolo(data);
+        },function(err){/*errore 400*/
+            console.log(err);
+        }).catch(function(err){/*errore 500*/
+            console.log(err);
         });
+      });
     </script>
   </body>
 </html>
