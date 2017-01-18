@@ -1,127 +1,144 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>javascript</title>
-</head>
-<body>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <title>Il tuo cinema - DB</title>
 
-	<script src="jquery/jquery-3.1.1-dist/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-      
-    //javascript
+    <link href="bootstrap/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css"> 
+  </head>
+  <body>
 
+    <div class="container">
+      <div class="row">
+        <div class="col-mid-12">   
+<!-- INIZIO POSIZIONAMENTO MENU + LOGO -->
+          <div class="flex-container">
+            <div> <!--  inizio menù animato -->
+              <ul id="move-navigation">
+                <li class="move-element"><h3>CATEGORIE</h3></li>
+                <li class="move-element"><a href="#">Film</a></li>
+                <li class="move-element"><a href="#">Serie tv</a></li>
+                <li class="move-element"><a href="#">Documentari</a></li>
+                <li class="move-element"><a href="#">Bambini</a></li>
+              </ul>
+            </div> 
+<!-- fine menù animato -->
+            <img src="http://i.imgur.com/LFExQLG.png" alt="ilTuoCinemaLogo">
+          </div>
+<!-- FINE POSIZIONAMENTO MENU + LOGO -->
+          <br><br>
+<!-- INIZIO INPUT TITLE-FILM --> 
+          <div id="inputwidth">
+            <form id="target">
+              <div id="custom-search-input">
+                <div class="input-group col-md-12">
+                    <input type="text" name="titolo" class="form-control input-lg center" placeholder="Scegli il tuo film" />
+                </div>
+              </div>
+            </form type="submit">
+          </div>
+<!-- FINE INPUT TITLE-FILM -->
+        </div>
+      </div>
+    </div>
+<!-- APPLICATION START HERE -->
+    <div id="table">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Immagine</th>
+            <th>Titolo</th>
+            <th>Tipo</th>
+            <th>Anno</th>
+          </tr>
+        </thead>
+        <tbody id="tb_film">
+        </tbody>
+      </table>
+    </div>
+    <div id="dettaglio">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Immagine</th>
+            <th>Voti</th>
+            <th>Descrizione</th>
+          </tr>
+        </thead>
+        <tbody id="tb_det">
+        </tbody>
+      </table>
+    </div>
     
+<!-- INIZIO SCRIPT  -->
+    <script src="jquery/jquery-3.1.1-dist/jquery-3.1.1.min.js"></script>
+    <script src="bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="js/example.js"></script>
+    <script type="text/javascript">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    	$('tbody').on("click","tr",function(){
-            console.log(this);
-            var endpoint='http://www.omdbapi.com/?i=';
-            var url=endpoint;
-            var ricevuto=this.id;
-
-            /*var data={
-              s:titolo,
-            };*/
-            $.ajax({
-              url: url + ricevuto,
-              method: 'GET'
-            }).then(function(data) {
-                $("#table").hide();
-                $("#dettaglio").show();
-                console.log(data);
-                $("#tb_det").html("");
-                var film=data;
-                var tr='';
-                var img="";
-                if(film.Poster=='N/A'){
-                    img="http://placehold.it/300x450";
-                }else{
-                    img=film.Poster;
-                }
-                tr +=''+
-                "<tr>"+
-                '<td>'+'<img src="'+img+'" alt="testo" />'+'</td>'+
-                '<td>'+
-                '<p>'+'Titolo: '+film.Title+'</p>'+
-                '<p>'+'Genere: '+film.Genre+'</p>'+
-                '<p>'+'Anno: '+film.Released+'</p>'+
-                '<p>'+'Metascore: '+film.Metascore+'</p>'+
-                '<p>'+'imdbRating: '+film.imdbRating+'</p>'+
-                '<p>'+'imdbVotes: '+film.imdbVotes+'</p>'+
-                '</td>'+
-                '<td>'+
-                '<p>'+'Direttore: '+film.Director+'</p>'+
-                '<p>'+'Scrittore: '+film.Writer+'</p>'+
-                '<p>'+'Attori: '+film.Actors+'</p>'+
-                '<p>'+'?: '+film.Plot+'</p>'+
-                '<p>'+'Lingua: '+film.Language+'</p>'+
-                '<p>'+'Paese: '+film.Country+'</p>'+
-                '<p>'+'Premi: '+film.Awards+'</p>'+
-                '</td>'+
-                'tr>';
-              $("#tb_det").html(tr);
+      document.getElementById("dettaglio").style.display="none";
+      var mostra = function(id){
+        var endpoint='http://www.omdbapi.com/?i=';
+        var url=endpoint;
+        var ricevuto=id;
+        $.ajax({
+          url: url + ricevuto,
+          method: 'GET'
+        }).then(function(data) {
+          films.dettaglio(data);
+        });
+      };
+      document.addEventListener('submit', function(event) {//mi metto in ascolto e appena faccio il submit parte la funzione
+        event.preventDefault();/*non mi manda su un'altra pagina*/
+        var endpoint='http://www.omdbapi.com/?s=';
+        var url=endpoint;
+        var titolo= document.getElementById("input_titolo").value;
+        $.ajax({
+          url: url + titolo,
+          method: 'GET'
+        }).then(function(data) {/*successo*/
+          films.titolo(data);
+        },function(err){/*errore 400*/
+            console.log(err);
+        }).catch(function(err){/*errore 500*/
+            console.log(err);
+        });
+      });
+// INIZIO menù laterale
+      $(document).ready(function() {
+        slide("#move-navigation", 20, 35, 150, 0.5);
+      });
+      function slide(nav_id, pad_in, pad_out, tempo, molt) {
+// Salvo gli elementi su variabili
+        var li_ele = nav_id + " li.move-element";
+        var link_ele = li_ele + " a";    
+// Effettivo timer
+        var timer = 0;  
+// Crea il movimento non appena viene tutto caricato
+        $(li_ele).each(function(i) {
+          // margin left = - ([larghezza elemento] + [padding verticale elemento])
+          $(this).css("margin-left","-180px");
+// Aggiorno il timer
+          timer = (timer*molt + tempo);
+          $(this).animate({ marginLeft: "0" }, timer);
+          $(this).animate({ marginLeft: "15px" }, timer);
+          $(this).animate({ marginLeft: "0" }, timer);
+        });
+// Crea il mouse over sugli elementi 
+        $(link_ele).each(function(i) {
+          $(this).hover( function(){
+            $(this).stop().animate({ paddingLeft: pad_out }, 150);
+          }, function(){
+            $(this).stop().animate({ paddingLeft: pad_in }, 150);
           });
         });
-
-        $("#target").submit(function( event ) {
-            event.preventDefault();/*non mi manda su un'altra pagina*/
-            var endpoint='http://www.omdbapi.com/?s=';
-            var url=endpoint;
-            var titolo=$("input[name='titolo']").val();
-
-            /*var data={
-              s:titolo,
-            };*/
-            $.ajax({
-              url: url + titolo,
-              method: 'GET'
-            }).then(function(data) {/*successo*/
-              console.log(data);
-              var film=data;
-              $("#tb_film").html("");
-              var tr='';
-              console.log(film.Search.length);
-              for(i=0;i<film.Search.length;i++){
-                var img="";
-                if(film.Search[i].Poster=='N/A'){
-                    img="http://placehold.it/300x450";
-                }else{
-                    img=film.Search[i].Poster;
-                }
-                var id=film.Search[i].imdbID;
-                tr +=''+
-                "<tr class='dettaglio' id='"+id+"'>"+
-                '<td>'+'<b>'+(i+1)+'<b>'+'</td>'+
-                '<td>'+'<img src="'+img+'" alt="testo" />'+'</td>'+
-                '<td>'+film.Search[i].Title+'</td>'+
-                '<td>'+film.Search[i].Type+'</td>'+
-                '<td>'+film.Search[i].Year+'</td>'+
-                'tr>';
-                console.log(film.Search[i].imdbID);
-
-              }
-              $("#tb_film").html(tr);
-            },function(err){/*errore 400*/
-                console.log(err);
-            }).catch(function(err){/*errore 500*/
-                console.log(err);
-            });
-        });
-
+      }
+// FINE menà laterale 
     </script>
-</body>
+  </body>
 </html>
