@@ -27,7 +27,7 @@
               </ul>
             </div> 
 <!-- fine menù animato -->
-            <img src="http://i.imgur.com/LFExQLG.png" alt="ilTuoCinemaLogo">
+            <img src="images/ilTuoCinema.png" alt="il tuo cinema logo">
           </div>
 <!-- FINE POSIZIONAMENTO MENU + LOGO -->
           <br><br>
@@ -36,7 +36,7 @@
             <form id="target">
               <div id="custom-search-input">
                 <div class="input-group col-md-12">
-                    <input type="text" name="titolo" class="form-control input-lg center" placeholder="Scegli il tuo film" />
+                    <input id="input_titolo" type="text" name="titolo" class="form-control input-lg center" placeholder="Scegli il tuo film" />
                 </div>
               </div>
             </form type="submit">
@@ -69,6 +69,7 @@
             <th>Voti</th>
             <th>Descrizione</th>
           </tr>
+          <button onclick="films.indietro()">indietro</button>
         </thead>
         <tbody id="tb_det">
         </tbody>
@@ -80,7 +81,7 @@
     <script src="bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="js/example.js"></script>
     <script type="text/javascript">
-
+    document.getElementById("table").style.display="none";
       document.getElementById("dettaglio").style.display="none";
       var mostra = function(id){
         var endpoint='http://www.omdbapi.com/?i=';
