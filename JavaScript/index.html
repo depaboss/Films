@@ -20,10 +20,9 @@
             <div> <!--  inizio menù animato -->
               <ul id="move-navigation">
                 <li class="move-element"><h3>CATEGORIE</h3></li>
-                <li class="move-element"><a href="#">Film</a></li>
-                <li class="move-element"><a href="#">Serie tv</a></li>
-                <li class="move-element"><a href="#">Documentari</a></li>
-                <li class="move-element"><a href="#">Bambini</a></li>
+                <li id="&type=movie" class="move-element" onclick="genere('movie')"><a>Film</a></li>
+                <li id="&type=series" class="move-element" onclick="genere('series')"><a>Serie tv</a></li>
+                <li id="&type=episode" class="move-element" onclick="genere('episode')"><a>Episodio</a></li>
               </ul>
             </div> 
 <!-- fine menù animato -->
@@ -68,8 +67,10 @@
             <th>Immagine</th>
             <th>Voti</th>
             <th>Descrizione</th>
+            <th>
+              <button onclick="films.indietro()" class="border">indietro</button>
+            </th>
           </tr>
-          <button onclick="films.indietro()">indietro</button>
         </thead>
         <tbody id="tb_det">
         </tbody>
@@ -81,12 +82,18 @@
     <script src="bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="js/example.js"></script>
     <script type="text/javascript">
-    document.getElementById("table").style.display="none";
+      var tipo="";
+      var genere= function(genere){
+        tipo="&type="+genere;
+        document.getElementById(tipo).style.background="#51231f";
+      }
+      document.getElementById("table").style.display="none";
       document.getElementById("dettaglio").style.display="none";
       var mostra = function(id){
         var endpoint='http://www.omdbapi.com/?i=';
         var url=endpoint;
         var ricevuto=id;
+        console.log(type);
         $.ajax({
           url: url + ricevuto,
           method: 'GET'
@@ -94,13 +101,14 @@
           films.dettaglio(data);
         });
       };
+
       document.addEventListener('submit', function(event) {//mi metto in ascolto e appena faccio il submit parte la funzione
         event.preventDefault();/*non mi manda su un'altra pagina*/
         var endpoint='http://www.omdbapi.com/?s=';
         var url=endpoint;
-        var titolo= document.getElementById("input_titolo").value;
+        var titolo= document.getElementById("input_titolo").value + tipo;
         $.ajax({
-          url: url + titolo,
+          url: url + titolo ,
           method: 'GET'
         }).then(function(data) {/*successo*/
           films.titolo(data);
@@ -109,6 +117,7 @@
         }).catch(function(err){/*errore 500*/
             console.log(err);
         });
+        tipo="";
       });
 // INIZIO menù laterale
       $(document).ready(function() {

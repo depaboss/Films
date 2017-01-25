@@ -1,3 +1,5 @@
+.object { cursor:pointer; }
+.border{border-radius: 6px}
 /*INIZIO MENU*/
 
 ul, li, li a {

@@ -18,7 +18,7 @@ var films = (function() {
         img=film.Search[i].Poster;
         var id=film.Search[i].imdbID;
         tr +=''+
-        "<tr onclick='mostra(id)' class='dettaglio' id='"+id+"'>"+
+        "<tr onclick='mostra(id)' class='dettaglio object' id='"+id+"'>"+
         '<td>'+'<b>'+number+'<b>'+'</td>'+
         '<td>'+'<img src="'+img+'" alt="testo" />'+'</td>'+
         '<td>'+film.Search[i].Title+'</td>'+
@@ -57,7 +57,7 @@ var films = (function() {
       '<p>'+'Direttore: '+film.Director+'</p>'+
       '<p>'+'Scrittore: '+film.Writer+'</p>'+
       '<p>'+'Attori: '+film.Actors+'</p>'+
-      '<p>'+'?: '+film.Plot+'</p>'+
+      // '<p>'+'?: '+film.Plot+'</p>'+
       '<p>'+'Lingua: '+film.Language+'</p>'+
       '<p>'+'Paese: '+film.Country+'</p>'+
       '<p>'+'Premi: '+film.Awards+'</p>'+
@@ -71,6 +71,6 @@ var films = (function() {
 	return{
 		titolo:_titolo,
 		dettaglio:_dettaglio,
-		indietro:_indietro
+		indietro:_indietro,
 	};
 })();
