@@ -96,7 +96,9 @@
           tipo="";
         }else{
           document.getElementById(tipo).style.background="#51231f";
-          document.getElementById(vecchio).style.background="#eee";
+          if(vecchio!=""){
+            document.getElementById(vecchio).style.background="#eee";
+          }
         }
       }
       document.getElementById("table").style.display="none";
@@ -105,7 +107,6 @@
         var endpoint='http://www.omdbapi.com/?i=';
         var url=endpoint;
         var ricevuto=id;
-        console.log(type);
         $.ajax({
           url: url + ricevuto,
           method: 'GET'
@@ -129,8 +130,10 @@
         }).catch(function(err){/*errore 500*/
             console.log(err);
         });
-        document.getElementById(tipo).style.background="#eee";
-        tipo="";
+        if(tipo!=""){
+          document.getElementById(tipo).style.background="#eee";
+          tipo="";
+        } 
       });
 // INIZIO menù laterale
       $(document).ready(function() {
