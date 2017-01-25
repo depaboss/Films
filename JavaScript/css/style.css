@@ -1,4 +1,4 @@
-.object { cursor:pointer; }
+.pointer { cursor:pointer; }
 .border{border-radius: 6px}
 /*INIZIO MENU*/
 
@@ -75,3 +75,13 @@ p, p a { font-size: 12px;text-align: center; color: #888; }
 border-radius: 70px !important;
    }
 
+
+
+td p{
+  text-align: left;
+  font-size: 20px;
+}
+
+.testo{
+  font-size: 25px;
+}

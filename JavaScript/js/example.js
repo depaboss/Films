@@ -8,6 +8,7 @@ var films = (function() {
 
 	var _titolo= function(data){
 		document.getElementById("input_titolo").value="";
+    document.getElementById("data_film").value="";
     var film=data;
     document.getElementById('tb_film').innerHTML="";
     var tr='';
@@ -18,12 +19,12 @@ var films = (function() {
         img=film.Search[i].Poster;
         var id=film.Search[i].imdbID;
         tr +=''+
-        "<tr onclick='mostra(id)' class='dettaglio object' id='"+id+"'>"+
+        "<tr onclick='mostra(id)' class='pointer' id='"+id+"'>"+
         '<td>'+'<b>'+number+'<b>'+'</td>'+
-        '<td>'+'<img src="'+img+'" alt="testo" />'+'</td>'+
-        '<td>'+film.Search[i].Title+'</td>'+
-        '<td>'+film.Search[i].Type+'</td>'+
-        '<td>'+film.Search[i].Year+'</td>'+
+        '<td>'+'<img src="'+img+'" alt="testo" width="150"/>'+'</td>'+
+        '<td class="testo">'+film.Search[i].Title+'</td>'+
+        '<td class="testo">'+film.Search[i].Type+'</td>'+
+        '<td class="testo">'+film.Search[i].Year+'</td>'+
         '</tr>';
         number++;
       }
@@ -46,22 +47,22 @@ var films = (function() {
       "<tr>"+
       '<td>'+'<img src="'+img+'" alt="testo" />'+'</td>'+
       '<td>'+
-      '<p>'+'Titolo: '+film.Title+'</p>'+
-      '<p>'+'Genere: '+film.Genre+'</p>'+
-      '<p>'+'Anno: '+film.Released+'</p>'+
-      '<p>'+'Metascore: '+film.Metascore+'</p>'+
-      '<p>'+'imdbRating: '+film.imdbRating+'</p>'+
-      '<p>'+'imdbVotes: '+film.imdbVotes+'</p>'+
+      '<p>'+'<b>'+'Titolo: '+'</b>'+film.Title+'</p>'+
+      '<p>'+'<b>'+'Anno: '+'</b>'+film.Released+'</p>'+
+      '<p>'+'<b>'+'Paese: '+'</b>'+film.Country+'</p>'+
+      '<p>'+'<b>'+'Metascore: '+'</b>'+film.Metascore+'</p>'+
+      '<p>'+'<b>'+'imdbRating: '+'</b>'+film.imdbRating+'</p>'+
+      '<p>'+'<b>'+'imdbVotes: '+'</b>'+film.imdbVotes+'</p>'+
       '</td>'+
       '<td>'+
-      '<p>'+'Direttore: '+film.Director+'</p>'+
-      '<p>'+'Scrittore: '+film.Writer+'</p>'+
-      '<p>'+'Attori: '+film.Actors+'</p>'+
+      '<p>'+'<b>'+'Genere: '+'</b>'+film.Genre+'</p>'+
+      '<p>'+'<b>'+'Direttore: '+'</b>'+film.Director+'</p>'+
+      '<p>'+'<b>'+'Scrittore: '+'</b>'+film.Writer+'</p>'+
+      '<p>'+'<b>'+'Lingua: '+'</b>'+film.Language+'</p>'+
+      '<p>'+'<b>'+'Attori: '+'</b>'+film.Actors+'</p>'+
       // '<p>'+'?: '+film.Plot+'</p>'+
-      '<p>'+'Lingua: '+film.Language+'</p>'+
-      '<p>'+'Paese: '+film.Country+'</p>'+
-      '<p>'+'Premi: '+film.Awards+'</p>'+
-      '</td>'+
+      '<p>'+'<b>'+'Premi: '+'</b>'+film.Awards+'</p>'+
+      '</td>'+'<td>'+'</td>'+
       '</tr>';
     }                
     document.getElementById("tb_det").innerHTML=tr;                

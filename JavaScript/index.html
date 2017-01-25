@@ -42,6 +42,7 @@
                 </div>
               </div>
             </form type="submit">
+            <input id="data_film" type="number" name="date" placeholder="data">
           </div>
           </div></center>
 <!-- FINE INPUT TITLE-FILM -->
@@ -68,7 +69,7 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>Immagine</th>
+            <th></th>
             <th>Voti</th>
             <th>Descrizione</th>
             <th>
@@ -117,9 +118,14 @@
 
       document.addEventListener('submit', function(event) {//mi metto in ascolto e appena faccio il submit parte la funzione
         event.preventDefault();/*non mi manda su un'altra pagina*/
+        var data ="";
+        var data1=document.getElementById("data_film").value;
+        if(data1!=null){
+          data="&y="+data1; 
+        }   
         var endpoint='http://www.omdbapi.com/?s=';
         var url=endpoint;
-        var titolo= document.getElementById("input_titolo").value + tipo;
+        var titolo= document.getElementById("input_titolo").value + tipo + data;
         $.ajax({
           url: url + titolo ,
           method: 'GET'
