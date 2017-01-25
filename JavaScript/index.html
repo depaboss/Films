@@ -12,12 +12,12 @@
   </head>
   <body>
 
-    <div class="container">
+    <div id="wrapper" class="container">
       <div class="row">
         <div class="col-mid-12">   
 <!-- INIZIO POSIZIONAMENTO MENU + LOGO -->
-          <div class="flex-container">
-            <div> <!--  inizio menù animato -->
+          
+            <div id="float1"> <!--  inizio menù animato -->
               <ul id="move-navigation">
                 <li class="move-element"><h3>CATEGORIE</h3></li>
                 <li id="&type=movie" class="move-element" onclick="genere('movie')"><a>Film</a></li>
@@ -26,20 +26,24 @@
               </ul>
             </div> 
 <!-- fine menù animato -->
-            <img src="images/ilTuoCinema.png" alt="il tuo cinema logo">
-          </div>
+            <div id="float">
+                <img src="http://i.imgur.com/LFExQLG.png" alt="ilTuoCinemaLogo">
+            </div>
+          
 <!-- FINE POSIZIONAMENTO MENU + LOGO -->
-          <br><br>
-<!-- INIZIO INPUT TITLE-FILM --> 
+          <br><br><br><br>
+<!-- INIZIO INPUT TITLE-FILM -->
+          <center><div id="position"> 
           <div id="inputwidth">
             <form id="target">
               <div id="custom-search-input">
                 <div class="input-group col-md-12">
-                    <input id="input_titolo" type="text" name="titolo" class="form-control input-lg center" placeholder="Scegli il tuo film" />
+                    <input id="input_titolo" type="text" name="titolo" class="form-control input-lg center borderadius" placeholder="Scegli il tuo film" />
                 </div>
               </div>
             </form type="submit">
           </div>
+          </div></center>
 <!-- FINE INPUT TITLE-FILM -->
         </div>
       </div>
