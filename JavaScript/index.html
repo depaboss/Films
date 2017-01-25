@@ -87,9 +87,17 @@
     <script src="js/example.js"></script>
     <script type="text/javascript">
       var tipo="";
+      var vecchio="";
       var genere= function(genere){
+        vecchio=tipo;
         tipo="&type="+genere;
-        document.getElementById(tipo).style.background="#51231f";
+        if(vecchio==tipo){
+          document.getElementById(vecchio).style.background="#eee";
+          tipo="";
+        }else{
+          document.getElementById(tipo).style.background="#51231f";
+          document.getElementById(vecchio).style.background="#eee";
+        }
       }
       document.getElementById("table").style.display="none";
       document.getElementById("dettaglio").style.display="none";
@@ -121,11 +129,12 @@
         }).catch(function(err){/*errore 500*/
             console.log(err);
         });
+        document.getElementById(tipo).style.background="#eee";
         tipo="";
       });
 // INIZIO menù laterale
       $(document).ready(function() {
-        slide("#move-navigation", 20, 35, 150, 0.5);
+        slide("#move-navigation", 0, 35, 150, 0.5);
       });
       function slide(nav_id, pad_in, pad_out, tempo, molt) {
 // Salvo gli elementi su variabili

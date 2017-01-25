@@ -70,8 +70,8 @@ p, p a { font-size: 12px;text-align: center; color: #888; }
 
 
    .borderadius{
-    -webkit-border-radius: 65px !important;
--moz-border-radius: 65px !important;
-border-radius: 65px !important;
+    -webkit-border-radius: 70px !important;
+-moz-border-radius: 70px !important;
+border-radius: 70px !important;
    }
 
