@@ -17,39 +17,56 @@
         <div class="col-mid-12">   
 <!-- INIZIO POSIZIONAMENTO MENU + LOGO -->
           
-            <div id="float1"> <!--  inizio menù animato -->
+<!-- inizio menù animato -->
+            <div id="float1">
               <ul id="move-navigation">
-                <li class="move-element"><h3>CATEGORIE</h3></li>
+                <li class="move-element"><h3>Categoria</h3></li>
                 <li id="&type=movie" class="move-element" onclick="genere('movie')"><a>Film</a></li>
                 <li id="&type=series" class="move-element" onclick="genere('series')"><a>Serie tv</a></li>
                 <li id="&type=episode" class="move-element" onclick="genere('episode')"><a>Episodio</a></li>
+              </ul>
+            </div>
+            <div id="float2"> <!--  inizio menù animato -->
+              <ul id="move-navigation">
+                <li class="move-element"><h3>Anno</h3></li>
+                <li class="move-element">
+                  <input id="data_film" type="number" placeholder="anno">
+                </li>
+              </ul>
+            </div>
+            <div id="float3"> <!--  inizio menù animato -->
+              <ul id="move-navigation">
+                <li class="move-element"><h3>FILTRA PER:</h3></li>
               </ul>
             </div> 
 <!-- fine menù animato -->
             <div id="float">
                 <img src="http://i.imgur.com/LFExQLG.png" alt="ilTuoCinemaLogo">
-            </div>
-          
+            </div>        
 <!-- FINE POSIZIONAMENTO MENU + LOGO -->
           <br><br><br><br>
 <!-- INIZIO INPUT TITLE-FILM -->
-          <center><div id="position"> 
-          <div id="inputwidth">
-            <form id="target">
-              <div id="custom-search-input">
-                <div class="input-group col-md-12">
-                    <input id="input_titolo" type="text" name="titolo" class="form-control input-lg center borderadius" placeholder="Scegli il tuo film" />
-                </div>
+          <center>
+            <div id="position"> 
+              <div id="inputwidth">
+                <form id="target">
+                  <div id="custom-search-input">
+                    <div class="input-group col-md-12">
+                      <input id="input_titolo" type="text" name="titolo" class="form-control input-lg center borderadius" placeholder="Scegli il tuo film" />
+                    </div>
+                  </div>
+                </form type="submit">
               </div>
-            </form type="submit">
-            <input id="data_film" type="number" name="date" placeholder="data">
-          </div>
-          </div></center>
+            </div>
+          </center>
+          <!-- <div id='button-holder'>
+            <img src='images/glass.png' />
+          </div> -->
 <!-- FINE INPUT TITLE-FILM -->
         </div>
       </div>
     </div>
-<!-- APPLICATION START HERE -->
+<!-- INIZIO TABELLA CON ELENCO DEI FILM -->
     <div id="table">
       <table class="table table-hover">
         <thead>
@@ -57,7 +74,7 @@
             <th>#</th>
             <th>Immagine</th>
             <th>Titolo</th>
-            <th>Tipo</th>
+            <th>Categoria</th>
             <th>Anno</th>
           </tr>
         </thead>
@@ -65,6 +82,9 @@
         </tbody>
       </table>
     </div>
+<!-- FINE TABELLA DEI FILM -->
+
+<!-- INIZIO DELLA TABELLA DI DESCRIZIONE -->
     <div id="dettaglio">
       <table class="table table-hover">
         <thead>
@@ -81,27 +101,32 @@
         </tbody>
       </table>
     </div>
+<!-- FINE TABELLA DI DESCRIZIONE -->
     
 <!-- INIZIO SCRIPT  -->
     <script src="jquery/jquery-3.1.1-dist/jquery-3.1.1.min.js"></script>
     <script src="bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="js/example.js"></script>
     <script type="text/javascript">
-      var tipo="";
-      var vecchio="";
+/*FUNZIONE PER CONTROLLARE LA CATEGORIA*/
+      var categoria="";
+      var controllo="";
       var genere= function(genere){
-        vecchio=tipo;
-        tipo="&type="+genere;
-        if(vecchio==tipo){
-          document.getElementById(vecchio).style.background="#eee";
-          tipo="";
+        controllo=categoria;
+        categoria="&type="+genere;
+        if(controllo==categoria){
+          document.getElementById(controllo).style.background="#eee";
+          categoria="";
         }else{
-          document.getElementById(tipo).style.background="#51231f";
-          if(vecchio!=""){
-            document.getElementById(vecchio).style.background="#eee";
+          document.getElementById(categoria).style.background="#51231f";
+          if(controllo!=""){
+            document.getElementById(controllo).style.background="#eee";
           }
         }
       }
+/*FINE FUNZIONE CATEGORIA*/
+
+/*INIZIO FUNZIONE DI RICERCA DELLA DESCRIZIONE*/
       document.getElementById("table").style.display="none";
       document.getElementById("dettaglio").style.display="none";
       var mostra = function(id){
@@ -115,17 +140,19 @@
           films.dettaglio(data);
         });
       };
+/*FINE FUNZIONE DELLA DESCRIZIONE*/
 
+/*INIZIO FUNZIONE DI RICERCA DEI FILM*/
       document.addEventListener('submit', function(event) {//mi metto in ascolto e appena faccio il submit parte la funzione
         event.preventDefault();/*non mi manda su un'altra pagina*/
-        var data ="";
-        var data1=document.getElementById("data_film").value;
-        if(data1!=null){
-          data="&y="+data1; 
+        var anno ="";
+        var controllo_anno=document.getElementById("data_film").value;
+        if(controllo_anno!=null){
+          anno="&y="+controllo_anno; 
         }   
         var endpoint='http://www.omdbapi.com/?s=';
         var url=endpoint;
-        var titolo= document.getElementById("input_titolo").value + tipo + data;
+        var titolo= document.getElementById("input_titolo").value + categoria + anno;
         $.ajax({
           url: url + titolo ,
           method: 'GET'
@@ -136,41 +163,20 @@
         }).catch(function(err){/*errore 500*/
             console.log(err);
         });
-        if(tipo!=""){
-          document.getElementById(tipo).style.background="#eee";
-          tipo="";
+        if(categoria!=""){
+          document.getElementById(categoria).style.background="#eee";
+          categoria="";
         } 
       });
-// INIZIO menù laterale
+/*FINE FUNZIONE RICERCA DEI FILM*/
+
+/*FUNZIONE PER AZIONARE L'ANIMAZIONE*/
       $(document).ready(function() {
-        slide("#move-navigation", 0, 35, 150, 0.5);
+        films.menu("#move-navigation", 0, 35, 150, 0.5);
       });
-      function slide(nav_id, pad_in, pad_out, tempo, molt) {
-// Salvo gli elementi su variabili
-        var li_ele = nav_id + " li.move-element";
-        var link_ele = li_ele + " a";    
-// Effettivo timer
-        var timer = 0;  
-// Crea il movimento non appena viene tutto caricato
-        $(li_ele).each(function(i) {
-          // margin left = - ([larghezza elemento] + [padding verticale elemento])
-          $(this).css("margin-left","-180px");
-// Aggiorno il timer
-          timer = (timer*molt + tempo);
-          $(this).animate({ marginLeft: "0" }, timer);
-          $(this).animate({ marginLeft: "15px" }, timer);
-          $(this).animate({ marginLeft: "0" }, timer);
-        });
-// Crea il mouse over sugli elementi 
-        $(link_ele).each(function(i) {
-          $(this).hover( function(){
-            $(this).stop().animate({ paddingLeft: pad_out }, 150);
-          }, function(){
-            $(this).stop().animate({ paddingLeft: pad_in }, 150);
-          });
-        });
-      }
-// FINE menà laterale 
+/*FINE FUNZIONE ANIMAZIONI*/
+      
     </script>
+<!-- FINE SCRIPT -->
   </body>
 </html>

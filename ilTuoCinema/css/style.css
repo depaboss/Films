@@ -1,0 +1,110 @@
+/*INIZIO MODIFICHE MENU*/
+  ul, li, li a {
+    list-style: none;
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+  li a {
+    padding: 5px;
+    color: #888;
+    text-decoration: none;
+    transition: all .2s;
+  }
+  li a:hover,
+  li a:focus {
+    background: #51231f;
+    color: #fff;
+  }
+/* demo styles */
+  body { margin-top: 3em; background: #eee; color: #555; font-family: "Open Sans", "Segoe UI", Helvetica, Arial, sans-serif; }
+  p, p a { font-size: 12px;text-align: center; color: #888; }
+/*FINE*/
+
+
+/*INIZIO POSIZIONAMENTO MENU*/
+  #wrapper {
+    position: relative;
+  }
+  #float1{
+    position: absolute;
+    float:left;
+    
+  }
+  #float2{
+    position: absolute;
+    float:left;
+    margin-left: 160px;
+  }
+  #float3{
+    position: absolute;
+    float:left;
+    margin-left: 60px;
+    margin-top: -30px;
+  }
+  #float {
+    float:right;
+    position: absolute;
+    top: 20px;
+    margin-left: 442px;
+    }
+/*FINE*/
+
+
+/*INIZIO MODIFICHE TAG INPUT DEL TITOLO*/
+
+  #inputwidth{
+    width:400px;
+    height:100px;
+    padding:5px;
+    text-align: center;
+    clear: both;
+  }
+
+  #position{
+    margin-top:200px;
+    clear: both;
+  }
+
+
+  .borderadius{
+    -webkit-border-radius: 70px !important;
+    -moz-border-radius: 70px !important;
+    border-radius: 70px !important;
+  }
+/*FINE*/
+
+
+/* INIZIO MODIFICHE TABELLA*/
+  .pointer { cursor:pointer; }
+  .border{border-radius: 6px}
+
+  td p{
+    text-align: left;
+    font-size: 20px;
+  }
+
+  .testo{
+    font-size: 25px;
+  }
+/*FINE*/
+
+
+/*ICONA DELLA LENTE*/
+  /*#button-holder{
+      background-color:#f1f1f1;
+      border-top:thin solid #e5e5e5;
+      box-shadow:1px 1px 1px 1px #e5e5e5;
+      cursor:pointer;
+      float:left;
+      height:27px;
+      margin:11px 0 0 0;
+      text-align:center;
+      width:50px;
+  }
+    
+  #button-holder img{
+      margin:4px;
+      width:20px; 
+  }*/
+/*FINE*/

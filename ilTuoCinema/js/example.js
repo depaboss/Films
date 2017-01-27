@@ -1,16 +1,20 @@
 var films = (function() {
-	// body...
 
+/*Funzione per tornare alla tabella con elenco dei film*/
   var _indietro= function(){
     document.getElementById("table").style.display = 'block';
     document.getElementById("dettaglio").style.display = 'none';
   };
+/*Fine funzione indietro*/
 
+/*Funzione che permette di trovare elenco dei film dal titolo + filtri*/
 	var _titolo= function(data){
+  //Azzero gli input e la precedente ricerca
 		document.getElementById("input_titolo").value="";
     document.getElementById("data_film").value="";
-    var film=data;
     document.getElementById('tb_film').innerHTML="";
+  //Prendo i film e gli inserisco in una variabile solo se hanno un'immagine 
+    var film=data;   
     var tr='';
     var number=1;
     for(i=0;i<film.Search.length;i++){
@@ -29,15 +33,20 @@ var films = (function() {
         number++;
       }
     }
-    document.getElementById("table").style.display="block";
-    document.getElementById("tb_film").innerHTML=tr;   
+  //Mostro a schermo tutti i film trovati
+    document.getElementById("tb_film").innerHTML=tr; 
+  //Azioni la funzione indietro in modo da visualizzare la tabella giusta  
     films.indietro();  
 	};
+/*Fine funzione titolo + filtri*/
 
+/*Funzione per vedere dettaglio del film selezionato*/
 	var _dettaglio= function(data){
+  //Nascondo la tabella con elenco dei film e molto la tabella con la descrizione
 		document.getElementById("table").style.display = 'none';
     document.getElementById("dettaglio").style.display = 'block';
     document.getElementById("tb_det").innerHTML="";
+  //Prendo e assegno i valori della descrizione del film selezionato
     var film=data;
     var tr='';
     var img="";
@@ -60,18 +69,48 @@ var films = (function() {
       '<p>'+'<b>'+'Scrittore: '+'</b>'+film.Writer+'</p>'+
       '<p>'+'<b>'+'Lingua: '+'</b>'+film.Language+'</p>'+
       '<p>'+'<b>'+'Attori: '+'</b>'+film.Actors+'</p>'+
-      // '<p>'+'?: '+film.Plot+'</p>'+
       '<p>'+'<b>'+'Premi: '+'</b>'+film.Awards+'</p>'+
       '</td>'+'<td>'+'</td>'+
       '</tr>';
-    }                
+    }
+  //visualizzo la descrizione su schermo           
     document.getElementById("tb_det").innerHTML=tr;                
 	};
+/*Fine funzione descrizione*/
 
+/*Funzione per animazione del menù*/
+  function _menu(nav_id, pad_in, pad_out, tempo, molt) {
+  // Salvo gli elementi su variabili
+        var li_ele = nav_id + " li.move-element";
+        var link_ele = li_ele + " a";    
+  // Effettivo timer
+        var timer = 0;  
+  // Crea il movimento non appena viene tutto caricato
+        $(li_ele).each(function(i) {
+          $(this).css("margin-left","-180px");
+  // Aggiorno il timer
+          timer = (timer*molt + tempo);
+          $(this).animate({ marginLeft: "0" }, timer);
+          $(this).animate({ marginLeft: "15px" }, timer);
+          $(this).animate({ marginLeft: "0" }, timer);
+        });
+  // Crea il mouse over sugli elementi 
+        $(link_ele).each(function(i) {
+          $(this).hover( function(){
+            $(this).stop().animate({ paddingLeft: pad_out }, 150);
+          }, function(){
+            $(this).stop().animate({ paddingLeft: pad_in }, 150);
+          });
+        });
+      }
+/*Fine funzione del menù*/
 
+/*Ritorno la le mie funzioni*/
 	return{
 		titolo:_titolo,
 		dettaglio:_dettaglio,
 		indietro:_indietro,
+    menu:_menu
 	};
+/*Fine ritorno*/
 })();
