@@ -1,182 +1,167 @@
 <!DOCTYPE html>
 <html lang="it">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="fragment" content="!">
+    <meta name="description" content="Site for the Artoo Campus">
+    <meta name="author" content="Artoo2016">
+    <meta name="application-name" content="Git">
+    <meta name="viewport" content="width=device-width">
+    <title>Seaching film | by Funica</title>
+</head>
 
-    <title>Il tuo cinema - DB</title>
-
-    <link href="bootstrap/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/style.css"> 
-  </head>
-  <body>
-
-    <div id="wrapper" class="container">
-      <div class="row">
-        <div class="col-mid-12">   
-<!-- INIZIO POSIZIONAMENTO MENU + LOGO -->
-          
-<!-- inizio menù animato -->
-            <div id="float1">
-              <ul id="move-navigation">
-                <li class="move-element"><h3>Categoria</h3></li>
-                <li id="&type=movie" class="move-element" onclick="genere('movie')"><a>Film</a></li>
-                <li id="&type=series" class="move-element" onclick="genere('series')"><a>Serie tv</a></li>
-                <li id="&type=episode" class="move-element" onclick="genere('episode')"><a>Episodio</a></li>
-              </ul>
-            </div>
-            <div id="float2"> <!--  inizio menù animato -->
-              <ul id="move-navigation">
-                <li class="move-element"><h3>Anno</h3></li>
-                <li class="move-element">
-                  <input id="data_film" type="number" placeholder="anno">
-                </li>
-              </ul>
-            </div>
-            <div id="float3"> <!--  inizio menù animato -->
-              <ul id="move-navigation">
-                <li class="move-element"><h3>FILTRA PER:</h3></li>
-              </ul>
-            </div> 
-<!-- fine menù animato -->
-            <div id="float">
-                <img src="http://i.imgur.com/LFExQLG.png" alt="ilTuoCinemaLogo">
-            </div>        
-<!-- FINE POSIZIONAMENTO MENU + LOGO -->
-          <br><br><br><br>
-<!-- INIZIO INPUT TITLE-FILM -->
-          <center>
-            <div id="position"> 
-              <div id="inputwidth">
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="center">Film</h1>
                 <form id="target">
-                  <div id="custom-search-input">
-                    <div class="input-group col-md-12">
-                      <input id="input_titolo" type="text" name="titolo" class="form-control input-lg center borderadius" placeholder="Scegli il tuo film" />
+                    <div id="custom-search-input">
+                        <div class="input-group col-md-12">
+                            <input type="text" name="titolo" class="form-control input-lg center" placeholder="Titolo" />
+                        </div>
                     </div>
-                  </div>
                 </form type="submit">
-              </div>
             </div>
-          </center>
-          <!-- <div id='button-holder'>
-            <img src='images/glass.png' />
-          </div> -->
-<!-- FINE INPUT TITLE-FILM -->
         </div>
-      </div>
-    </div>
-<!-- INIZIO TABELLA CON ELENCO DEI FILM -->
+        <!-- APPLICATION START HERE -->
+
     <div id="table">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Immagine</th>
-            <th>Titolo</th>
-            <th>Categoria</th>
-            <th>Anno</th>
-          </tr>
-        </thead>
-        <tbody id="tb_film">
-        </tbody>
-      </table>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Immagine</th>
+              <th>Titolo</th>
+              <th>Tipo</th>
+              <th>Anno</th>
+            </tr>
+          </thead>
+          <tbody id="tb_film">
+          </tbody>
+        </table>
     </div>
-<!-- FINE TABELLA DEI FILM -->
-
-<!-- INIZIO DELLA TABELLA DI DESCRIZIONE -->
     <div id="dettaglio">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Voti</th>
-            <th>Descrizione</th>
-            <th>
-              <button onclick="films.indietro()" class="border">indietro</button>
-            </th>
-          </tr>
-        </thead>
-        <tbody id="tb_det">
-        </tbody>
-      </table>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Immagine</th>
+              <th>Voti</th>
+              <th>Descrizione</th>
+            </tr>
+          </thead>
+          <tbody id="tb_det">
+          </tbody>
+        </table>
     </div>
-<!-- FINE TABELLA DI DESCRIZIONE -->
-    
-<!-- INIZIO SCRIPT  -->
-    <script src="jquery/jquery-3.1.1-dist/jquery-3.1.1.min.js"></script>
-    <script src="bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    <script src="js/example.js"></script>
+
+    </div>
+    <!-- JQUERY DEPENDENCIES -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <!-- BOOTSTRAP DEPENDENCIES -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <!-- APPLICATION  -->
+    <script src="js/app.js"></script>
     <script type="text/javascript">
-/*FUNZIONE PER CONTROLLARE LA CATEGORIA*/
-      var categoria="";
-      var controllo="";
-      var genere= function(genere){
-        controllo=categoria;
-        categoria="&type="+genere;
-        if(controllo==categoria){
-          document.getElementById(controllo).style.background="#eee";
-          categoria="";
-        }else{
-          document.getElementById(categoria).style.background="#51231f";
-          if(controllo!=""){
-            document.getElementById(controllo).style.background="#eee";
-          }
-        }
-      }
-/*FINE FUNZIONE CATEGORIA*/
+       $('tbody').on("click","tr",function(){
+            console.log(this);
+            var endpoint='http://www.omdbapi.com/?i=';
+            var url=endpoint;
+            var ricevuto=this.id;
 
-/*INIZIO FUNZIONE DI RICERCA DELLA DESCRIZIONE*/
-      document.getElementById("table").style.display="none";
-      document.getElementById("dettaglio").style.display="none";
-      var mostra = function(id){
-        var endpoint='http://www.omdbapi.com/?i=';
-        var url=endpoint;
-        var ricevuto=id;
-        $.ajax({
-          url: url + ricevuto,
-          method: 'GET'
-        }).then(function(data) {
-          films.dettaglio(data);
+            /*var data={
+              s:titolo,
+            };*/
+            $.ajax({
+              url: url + ricevuto,
+              method: 'GET'
+            }).then(function(data) {
+                $("#table").hide();
+                $("#dettaglio").show();
+                console.log(data);
+                $("#tb_det").html("");
+                var film=data;
+                var tr='';
+                var img="";
+                if(film.Poster=='N/A'){
+                    img="http://placehold.it/300x450";
+                }else{
+                    img=film.Poster;
+                }
+                tr +=''+
+                "<tr>"+
+                '<td>'+'<img src="'+img+'" alt="testo" />'+'</td>'+
+                '<td>'+
+                '<p>'+'Titolo: '+film.Title+'</p>'+
+                '<p>'+'Genere: '+film.Genre+'</p>'+
+                '<p>'+'Anno: '+film.Released+'</p>'+
+                '<p>'+'Metascore: '+film.Metascore+'</p>'+
+                '<p>'+'imdbRating: '+film.imdbRating+'</p>'+
+                '<p>'+'imdbVotes: '+film.imdbVotes+'</p>'+
+                '</td>'+
+                '<td>'+
+                '<p>'+'Direttore: '+film.Director+'</p>'+
+                '<p>'+'Scrittore: '+film.Writer+'</p>'+
+                '<p>'+'Attori: '+film.Actors+'</p>'+
+                '<p>'+'?: '+film.Plot+'</p>'+
+                '<p>'+'Lingua: '+film.Language+'</p>'+
+                '<p>'+'Paese: '+film.Country+'</p>'+
+                '<p>'+'Premi: '+film.Awards+'</p>'+
+                '</td>'+
+                'tr>';
+              $("#tb_det").html(tr);
+          });
         });
-      };
-/*FINE FUNZIONE DELLA DESCRIZIONE*/
 
-/*INIZIO FUNZIONE DI RICERCA DEI FILM*/
-      document.addEventListener('submit', function(event) {//mi metto in ascolto e appena faccio il submit parte la funzione
-        event.preventDefault();/*non mi manda su un'altra pagina*/
-        var anno ="";
-        var controllo_anno=document.getElementById("data_film").value;
-        if(controllo_anno!=null){
-          anno="&y="+controllo_anno; 
-        }   
-        var endpoint='http://www.omdbapi.com/?s=';
-        var url=endpoint;
-        var titolo= document.getElementById("input_titolo").value + categoria + anno;
-        $.ajax({
-          url: url + titolo ,
-          method: 'GET'
-        }).then(function(data) {/*successo*/
-          films.titolo(data);
-        },function(err){/*errore 400*/
-            console.log(err);
-        }).catch(function(err){/*errore 500*/
-            console.log(err);
+        $("#target").submit(function( event ) {
+            event.preventDefault();/*non mi manda su un'altra pagina*/
+            var endpoint='http://www.omdbapi.com/?s=';
+            var url=endpoint;
+            var titolo=$("input[name='titolo']").val();
+
+            /*var data={
+              s:titolo,
+            };*/
+            $.ajax({
+              url: url + titolo,
+              method: 'GET'
+            }).then(function(data) {/*successo*/
+              console.log(data);
+              var film=data;
+              $("#tb_film").html("");
+              var tr='';
+              console.log(film.Search.length);
+              for(i=0;i<film.Search.length;i++){
+                var img="";
+                if(film.Search[i].Poster=='N/A'){
+                    img="http://placehold.it/300x450";
+                }else{
+                    img=film.Search[i].Poster;
+                }
+                var id=film.Search[i].imdbID;
+                tr +=''+
+                "<tr class='dettaglio' id='"+id+"'>"+
+                '<td>'+'<b>'+(i+1)+'<b>'+'</td>'+
+                '<td>'+'<img src="'+img+'" alt="testo" />'+'</td>'+
+                '<td>'+film.Search[i].Title+'</td>'+
+                '<td>'+film.Search[i].Type+'</td>'+
+                '<td>'+film.Search[i].Year+'</td>'+
+                'tr>';
+                console.log(film.Search[i].imdbID);
+
+              }
+              $("#tb_film").html(tr);
+            },function(err){/*errore 400*/
+                console.log(err);
+            }).catch(function(err){/*errore 500*/
+                console.log(err);
+            });
         });
-        if(categoria!=""){
-          document.getElementById(categoria).style.background="#eee";
-          categoria="";
-        } 
-      });
-/*FINE FUNZIONE RICERCA DEI FILM*/
-
-/*FUNZIONE PER AZIONARE L'ANIMAZIONE*/
-      $(document).ready(function() {
-        films.menu("#move-navigation", 0, 35, 150, 0.5);
-      });
-/*FINE FUNZIONE ANIMAZIONI*/
-      
     </script>
-<!-- FINE SCRIPT -->
-  </body>
+</body>
+
 </html>
