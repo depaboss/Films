@@ -16,7 +16,37 @@
 </head>
 
 <body>
-   
+   <div class="container">
+       <div class="col-md-12">
+            <div class="row">
+                <h1 id="mostra"> clicca qui per mostrare la tabella</h1>
+                <table id="tabella" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td> Titolo</td>
+                            <td> Genere</td>
+                            <td> Anno</td>
+                            <td> Regista</td>
+                        </tr>
+                        
+                        <tbody>
+                            <tr>
+                                <td>ciao</td>
+                                <td>ciao</td>
+                                <td>ciao</td>
+                                <td>ciao </td>
+                            </tr>
+                        </tbody>
+                    </thead>
+                
+                </table>
+                
+
+
+
+            </div>
+        </div>
+   </div>
    
    
    
@@ -28,7 +58,13 @@
     <script src="bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="js/example.js"></script>
     <script type="text/javascript">
+
+    
        
+      mostra.onclick = function (){
+      tabella.innerHTML = "WOW";
+
+      };
 	   
 	   
 	   
